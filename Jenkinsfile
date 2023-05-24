@@ -25,6 +25,14 @@ pipeline {
             }
         }
         
+        stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('SonarQube Server Name') {
+            sh 'mvn sonar:sonar'
+        }
+    }
+}
+        
     }
       
 }
