@@ -1,6 +1,17 @@
 pipeline {
     agent any
     
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the source code from your version control system
+                // For example, if using Git:
+                git branch: 'main',
+                    url: 'https://github.com/iheb79/TrainProject.git'
+            }
+        }
+    
+    
    
         
         stage('Build') {
