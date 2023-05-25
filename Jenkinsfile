@@ -32,6 +32,28 @@ pipeline {
         }
     }
 }
+        stage('Docker Build') {
+            steps {
+                // Build the Docker image and include the JAR
+                script {
+                    docker.build('TrainProject:tag') {
+                        // Copy the JAR file into the Docker image
+                        sh 'cp target/ExamThourayaS2.jar .'
+                    }
+                }
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                // Push the Docker image to a Docker registry (e.g., Docker Hub)
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        docker.image('TrainProject').push()
+                    }
+                }
+            }
+        }
         
         
     }
